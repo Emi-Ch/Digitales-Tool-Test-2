@@ -1,0 +1,642 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Aptos",sans-serif;}
+.MsoChpDefault
+	{font-size:11.0pt;
+	font-family:"Aptos",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=DE style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal>&lt;!DOCTYPE html&gt;</p>
+
+<p class=MsoNormal>&lt;html lang=&quot;de&quot;&gt;</p>
+
+<p class=MsoNormal><span lang=EN-GB>&lt;head&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    &lt;meta charset=&quot;UTF-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    &lt;meta name=&quot;viewport&quot;
+content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    </span>&lt;title&gt;Digitales Tool im
+Chemieunterricht - Die Entstehung von temporären
+Dipol-Dipol-Wechselwirkungen&lt;/title&gt;</p>
+
+<p class=MsoNormal>    <span lang=EN-GB>&lt;style&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        body {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            margin: 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            display: flex;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            justify-content: center;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            align-items: center;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            height: 100vh;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            background-color: #f0f0f0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            font-family: Arial, sans-serif;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        #sketch-container {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            width: 100%;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            height: 100%;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    &lt;/style&gt;</span></p>
+
+<p class=MsoNormal>&lt;/head&gt;</p>
+
+<p class=MsoNormal>&lt;body&gt;</p>
+
+<p class=MsoNormal>    &lt;h1&gt;Digitales Tool im Chemieunterricht - Die
+Entstehung von temporären Dipol-Dipol-Wechselwirkungen&lt;/h1&gt;</p>
+
+<p class=MsoNormal>    <span lang=EN-GB>&lt;div
+id=&quot;sketch-container&quot;&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    &lt;script
+src=&quot;https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>    </span>&lt;script&gt;</p>
+
+<p class=MsoNormal>        // Hier fügen Sie Ihren JavaScript-Code ein</p>
+
+<p class=MsoNormal>        <span lang=EN-GB>let t = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let animating = false;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let secondMoleculeVisible = false;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let firstMoleculePosition = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let displacementX = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let displacementY = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let displacementTargetX = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let displacementTargetY = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let autoMove = false;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        let moveInterval;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function setup() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let canvas =
+createCanvas(windowWidth, windowHeight);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>           
+canvas.parent('sketch-container');</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            textAlign(CENTER, CENTER);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function draw() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            background(255);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawFrame();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawSmallMolecule();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawStaticSmallElectronCloud();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawInstructionText();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            translate(width * 0.3, height /
+2);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawMolecule();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawElectronCloud();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (displacementTargetX !== 0
+|| displacementTargetY !== 0) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementX +=
+(displacementTargetX - displacementX) * 0.05;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementY +=
+(displacementTargetY - displacementY) * 0.05;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (animating) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                t += 0.16;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawChargeCenters();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (secondMoleculeVisible) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                translate(width * 0.4, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                drawMolecule();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                drawElectronCloud();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                drawChargeCenters();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawFrame() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            stroke(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(2);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            noFill();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let frameWidth = width * 0.8;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let frameHeight = height * 0.6;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let xOffset = (width -
+frameWidth) / 2;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let yOffset = (height -
+frameHeight) / 2;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            rect(xOffset, yOffset,
+frameWidth, frameHeight);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        </span>}</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        function drawInstructionText() {</p>
+
+<p class=MsoNormal>            let instructionText = &quot;Bewege die Wolke mit
+den Pfeiltasten&quot;;</p>
+
+<p class=MsoNormal>            let secondInstructionText = &quot;Klicke auf
+Molekül für Wechselwirkung&quot;;</p>
+
+<p class=MsoNormal>            let thirdInstructionText = &quot;Drücke 'A' für
+automatische Bewegung&quot;;</p>
+
+<p class=MsoNormal>            <span lang=EN-GB>let moleculeSize = 20;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let instructionSize =
+moleculeSize / 2;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            fill(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            textSize(instructionSize);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(0.5);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(instructionText, width *
+0.2, height * 0.1);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(secondInstructionText,
+width * 0.2, height * 0.15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(thirdInstructionText,
+width * 0.2, height * 0.2);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawMolecule(scaleFactor =
+1) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            push();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            scale(scaleFactor);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            stroke(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(2);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            fill(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            textSize(20 * scaleFactor);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;C&quot;, -40, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;C&quot;, 40, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            textSize(16 * scaleFactor);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, -75, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, -40, -35);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, -40, 35);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, 75, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, 40, -35);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            text(&quot;H&quot;, 40, 35);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(2 * scaleFactor);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(-30, 0, 30, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(-60, 0, -48, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(-40, -25, -40, -15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(-40, 15, -40, 25);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(60, 0, 48, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(40, -25, 40, -15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            line(40, 15, 40, 25);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            pop();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawSmallMolecule() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            push();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            translate(width / 2, height *
+0.15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawMolecule(0.5);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            pop();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function
+drawStaticSmallElectronCloud() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            push();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            translate(width / 2, height *
+0.15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            scale(0.5);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            drawStaticElectronCloud();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            pop();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawStaticElectronCloud()
+{</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            noFill();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            stroke(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(1);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            beginShape();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            for (let angle = 0; angle &lt;
+TWO_PI; angle += PI / 16) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                let x = cos(angle) * 95;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                let y = sin(angle) * 65;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                vertex(x, y);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            endShape(CLOSE);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawElectronCloud() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            noFill();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            stroke(0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            strokeWeight(2);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            beginShape();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            for (let angle = 0; angle &lt;
+TWO_PI; angle += PI / 16) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                let x = cos(angle) * 95 +
+displacementX;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                let y = sin(angle) * 65 +
+displacementY;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                vertex(x, y);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            endShape(CLOSE);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function drawChargeCenters() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let offset = 10;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let leftChargeX = -95 +
+displacementX + offset;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let rightChargeX = 95 +
+displacementX - offset;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let topChargeY = -60 +
+displacementY;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let bottomChargeY = 60 +
+displacementY;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (displacementTargetX !== 0)
+{</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementY = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (displacementY &gt; 0) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                fill(0, 0, 255);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                noStroke();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                textSize(16);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                text(&quot;</span>&#948;<span
+lang=EN-GB>-&quot;, 0, bottomChargeY);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                fill(255, 0, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                text(&quot;</span>&#948;<span
+lang=EN-GB>+&quot;, 0, topChargeY);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            } else if (displacementY &lt;
+0) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                fill(0, 0, 255);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                noStroke();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                textSize(16);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                text(&quot;</span>&#948;<span
+lang=EN-GB>-&quot;, 0, topChargeY);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                fill(255, 0, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                text(&quot;</span>&#948;<span
+lang=EN-GB>+&quot;, 0, bottomChargeY);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            } else {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                let movingRight =
+displacementX &gt; 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                if (movingRight) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    fill(0, 0, 255);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    noStroke();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    textSize(16);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    text(&quot;</span>&#948;<span
+lang=EN-GB>-&quot;, rightChargeX, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    fill(255, 0, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    text(&quot;</span>&#948;<span
+lang=EN-GB>+&quot;, leftChargeX, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                } else {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    fill(0, 0, 255);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    noStroke();</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    textSize(16);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    text(&quot;</span>&#948;<span
+lang=EN-GB>-&quot;, leftChargeX, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    fill(255, 0, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    text(&quot;</span>&#948;<span
+lang=EN-GB>+&quot;, rightChargeX, 0);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function keyPressed() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (keyCode === LEFT_ARROW) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetX = -20;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            } else if (keyCode ===
+RIGHT_ARROW) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetX = 20;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            } else if (keyCode ===
+UP_ARROW) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetY = -20;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            } else if (keyCode ===
+DOWN_ARROW) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetY = 20;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (key === ' ' &amp;&amp;
+!secondMoleculeVisible) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                animating = !animating;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (key === 'A' || key === 'a')
+{</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                autoMove = !autoMove;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                if (autoMove) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    moveInterval =
+setInterval(randomMove, 333);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                } else {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                   
+clearInterval(moveInterval);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    displacementTargetX =
+0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                    displacementTargetY =
+0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function keyReleased() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (!autoMove) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetX = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                displacementTargetY = 0;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function mousePressed() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let d = dist(mouseX, mouseY,
+width / 2, height * 0.15);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            if (d &lt; 50) {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                animating = false;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                secondMoleculeVisible =
+true;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        function randomMove() {</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let moves = [</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                { x: -20, y: 0 },</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                { x: 20, y: 0 },</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                { x: 0, y: -20 },</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>                { x: 0, y: 20 }</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            ];</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            let move = random(moves);</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            displacementTargetX = move.x;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>            displacementTargetY = move.y;</span></p>
+
+<p class=MsoNormal><span lang=EN-GB>        </span>}</p>
+
+<p class=MsoNormal>    &lt;/script&gt;</p>
+
+<p class=MsoNormal>&lt;/body&gt;</p>
+
+<p class=MsoNormal>&lt;/html&gt;</p>
+
+</div>
+
+</body>
+
+</html>
